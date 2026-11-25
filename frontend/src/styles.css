@@ -1,0 +1,5 @@
+body { background: #f3f4f6; }
+.sidebar { width: 230px; min-height: 100vh; background: #1e2952; }
+.sidebar a { color: #fff; text-decoration: none; display: block; padding: 10px 16px; border-radius: 8px; margin-bottom: 6px; }
+.sidebar a.active, .sidebar a:hover { background: #2563eb; }
+.table thead th { background: #1e2952; color: #fff; }
