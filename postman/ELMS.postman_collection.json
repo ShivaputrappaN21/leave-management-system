@@ -1,0 +1,23 @@
+{
+  "info": { "name": "Employee Leave Management System", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "variable": [ { "key": "base", "value": "http://localhost:8080/api" } ],
+  "item": [
+    { "name": "GET employees", "request": { "method": "GET", "url": "{{base}}/employees" } },
+    { "name": "GET employee by id", "request": { "method": "GET", "url": "{{base}}/employees/1003" } },
+    { "name": "Search employees", "request": { "method": "GET", "url": "{{base}}/employees/search?name=ravi" } },
+    { "name": "POST employee", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "url": "{{base}}/employees",
+      "body": { "mode": "raw", "raw": "{\n \"name\": \"Divya S\", \"age\": 27, \"gender\": \"Female\", \"email\": \"divya.s@edutech.com\",\n \"salary\": 39000, \"department\": { \"deptId\": 2 }\n}" } } },
+    { "name": "POST employee - invalid age (400)", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "url": "{{base}}/employees",
+      "body": { "mode": "raw", "raw": "{\n \"name\": \"Kiran\", \"age\": 17, \"gender\": \"Male\", \"email\": \"kiran@edutech.com\",\n \"salary\": 30000, \"department\": { \"deptId\": 1 }\n}" } } },
+    { "name": "PUT employee", "request": { "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "url": "{{base}}/employees/1003",
+      "body": { "mode": "raw", "raw": "{\n \"name\": \"Ravi Kumar\", \"age\": 31, \"gender\": \"Male\", \"email\": \"ravi.kumar@edutech.com\",\n \"salary\": 52000, \"joinDate\": \"2019-06-12\", \"status\": \"ACTIVE\", \"department\": { \"deptId\": 2 }\n}" } } },
+    { "name": "POST leave request", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "url": "{{base}}/leave-requests",
+      "body": { "mode": "raw", "raw": "{\n \"employee\": { \"empNo\": 1003 }, \"leaveType\": { \"leaveTypeId\": 1 },\n \"fromDate\": \"2026-11-25\", \"toDate\": \"2026-11-27\", \"reason\": \"Family function\"\n}" } } },
+    { "name": "POST leave request - overlap (409)", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "url": "{{base}}/leave-requests",
+      "body": { "mode": "raw", "raw": "{\n \"employee\": { \"empNo\": 1003 }, \"leaveType\": { \"leaveTypeId\": 1 },\n \"fromDate\": \"2026-11-26\", \"toDate\": \"2026-11-28\", \"reason\": \"Trip\"\n}" } } },
+    { "name": "PUT approve request", "request": { "method": "PUT", "url": "{{base}}/leave-requests/1001/approve" } },
+    { "name": "DELETE (cancel) request", "request": { "method": "DELETE", "url": "{{base}}/leave-requests/1001" } },
+    { "name": "GET leave balances of employee", "request": { "method": "GET", "url": "{{base}}/leave-balances" } },
+    { "name": "GET dashboard", "request": { "method": "GET", "url": "{{base}}/dashboard" } }
+  ]
+}
